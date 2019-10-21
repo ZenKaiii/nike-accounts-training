@@ -65,20 +65,22 @@ def printRights():
 def train(username,password):
     isEmail = not username.isdigit()
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--headless')
     chrome_options.add_argument('--log-level=2')
     prefs = {"profile.managed_default_content_settings.images": 2}
     chrome_options.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://store.nike.com/cn/zh_cn/pw/mens-shoes/7puZoi3")
-
+    driver.maximize_window()
 
     time.sleep(13) #这里注意，暂停一段时间等待登录按钮加载出来，根据设备性能与网速自行调试
-    driver.find_element_by_xpath("//*[@id='AccountNavigationContainer']/button").click()
+    # driver.find_element_by_xpath("//*[@id='AccountNavigationContainer']/button").click()
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/header/nav[1]/section[1]/div/div/ul[2]/li[1]/div/button").click()
 
     if isEmail:
         print("[ZenKaiTraining]>A new account username:" + username + " using Email")
-        driver.find_element_by_link_text('使用电子邮件登录。').click()
+        # driver.find_element_by_link_text('使用电子邮件登录。').click()
+        driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/header/div[2]/div/div[1]/div/div[6]/form/div[4]/a").click()
         login_username = "emailAddress"
     else:
         print("[ZenKaiTraining]>A new account username:" + username + " using Mobile")
